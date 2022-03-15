@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="bar" class="spring.di.Bar"/>
+	<bean id="baz" class="spring.di.Baz"/>
+	
+	<bean id="fooo" class="spring.di.Fooo">
+		<lookup-method name="getBar" bean="bar"/>
+	</bean>
+	
+	<bean id="foo" class="spring.di.Foo"
+		p:bar-ref="bar" p:baz-ref="baz"
+		p:str="4번째" p:i="100" />
+	 
+<!-- 	<bean id="foo" class="spring.di.Foo"> 
+		<property name="bar">	
+			<ref bean="bar"/>
+			</property>
+			<property name="baz" ref="baz"/>
+			<property name="str" value="3번째 Foo"/>
+			<property name="i">
+				<value>10</value>
+			</property>
+	</bean> -->
+	</beans>
+
+<!-- <bean id="foo" class="spring.di.Foo"> 
+		<constructor-arg ref="bar"/>
+		<constructor-arg ref="baz"/>
+		<constructor-arg>
+		<value> Hello, spring</value>
+			</constructor-arg>
+			<constructor-arg value="1"/>
+			</bean>
+			</beans> -->
+			
+<!-- 			<ref bean="bar"/>
+		</constructor-arg>
+		<constructor-arg ref="baz"/>
+	</bean>	
+</beans>
+ -->
