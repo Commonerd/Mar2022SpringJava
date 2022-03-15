@@ -4,16 +4,52 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<bean id="colls" class="spring.di.CollectionTest">
+		<property name="greetings">
+			<list>
+				<value>hi</value>
+				<value>hello</value>
+			</list>
+		</property>
+		<property name="map">
+			<map>
+				<entry>
+					<key><value>1</value></key>
+					<value>scott</value>
+				</entry>
+				<entry>
+					<key><value>2</value></key>
+					<value>tiger</value>
+				</entry>
+			</map>
+		</property>
+		<property name="p"> <!-- 프로퍼티 변수명 -->
+			<props> <!-- 프로퍼티즈 타입의 객체 -->
+				<prop key="username">c##javakim</prop>
+				<prop key="password">javakim</prop>
+			</props>
+		</property>
+
+	</bean>
 	<bean id="bar" class="spring.di.Bar"/>
-	<bean id="baz" class="spring.di.Baz"/>
+	<!-- <bean id="bar1" class="spring.di.Bar"/> -->
+
+	<bean id="baz" class="spring.di.Baz"
+	init-method="start" destroy-method="stop"/>
 	
 	<bean id="fooo" class="spring.di.Fooo">
 		<lookup-method name="getBar" bean="bar"/>
 	</bean>
 	
+	<bean id="foo1" class="spring.di.Foo"
+		p:str="6번째 Foo" p:i="10000" autowire="byType"/>
+	
 	<bean id="foo" class="spring.di.Foo"
+		p:str="5번째 Foo" p:i="1000" autowire="byName"/>
+		
+<!-- 	<bean id="foo" class="spring.di.Foo"
 		p:bar-ref="bar" p:baz-ref="baz"
-		p:str="4번째" p:i="100" />
+		p:str="4번째" p:i="100" /> -->
 	 
 <!-- 	<bean id="foo" class="spring.di.Foo"> 
 		<property name="bar">	
