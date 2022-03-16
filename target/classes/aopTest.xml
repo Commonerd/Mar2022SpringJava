@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<!-- targetObject bean -->
+	<bean id="greeting" class="spring.aop.GreetingServiceImpl">
+		<property name="greeting">
+			<value>aop 연습 중</value>
+		</property>
+	</bean>
+	<!--  aspect bean -->
+	<bean class="spring.aop.LogAspect" id="logAspect"/>
+	<bean class="spring.aop.PerformanceAspect"
+	id="performanceAspect"/>
+	<!--  aop 설정 -->
+	<aop:config proxy-target-class="true">
+		<aop:pointcut expression="execution(public * *(..))" 
+											id="publicMethod"/> <!-- 퍼블릭 메서드가 호출됐을 떄 언제 실행시킬지 연결(하단코드) -->
+		<aop:aspect ref="logAspect">
+			<aop:before method="beforeLogging" 
+								pointcut-ref="publicMethod"/>	
+			<aop:after-returning method="afterLogging" pointcut-ref="publicMethod"
+										returning="returnValue"/>
+			<aop:after-throwing method="throwingLogging" pointcut-ref="publicMethod"
+										throwing="ex"/>
+			<aop:after method="alwaysLogging" pointcut-ref="publicMethod"/>
+		</aop:aspect>
+		
+	</aop:config>
+
+</beans>

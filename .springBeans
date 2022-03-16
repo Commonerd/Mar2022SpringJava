@@ -9,6 +9,7 @@
 	<configs>
 		<config>src/main/resources/applicationContext.xml</config>
 		<config>src/main/resources/annoTest.xml</config>
+		<config>src/main/resources/aopTest.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
