@@ -11,7 +11,7 @@ public class aopMain {
 
 		GreetingService greeting = context.getBean("greeting",GreetingService.class);
 		
-		greeting.sayHelllo("su");
+		greeting.sayHello("su");
 		try {
 			greeting.sayGoodbye("su");
 		} catch (Exception e) {
